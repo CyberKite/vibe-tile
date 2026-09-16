@@ -23,7 +23,7 @@ CXXDIR := $(dir $(shell where $(CXX) | head -n 1))
 OBJECTS = $(foreach obj,$(subst .cpp,.o,$(SOURCES)),$(notdir $(obj)))
 DEPENDS = $(foreach obj,$(subst .cpp,.d,$(SOURCES)),$(notdir $(obj)))
 
-.PHONY: all depend clean
+.PHONY: all depend clean install uninstall
 
 all: depend tile.exe arrange.dll arrange_twin.dll arrange_maximal.dll arrange_cross.dll arrange_square.dll arrange_manual.dll
 
@@ -36,6 +36,15 @@ clean:
 	rm -f arrange_.exe
 	rm -f arrange*.dll
 
+install: all
+	mkdir -p "$(INSTDIR)"
+	cp tile.exe arrange*.dll '$(INSTDIR)/'
+	cp tile.json '$(INSTDIR)/tile.json.example'
+	cp -n '$(INSTDIR)/tile.json.example' '$(INSTDIR)/tile.json'
+	cp '$(CXXDIR)libstdc++-6.dll' '$(CXXDIR)libgcc_s_seh-1.dll' '$(CXXDIR)libwinpthread-1.dll' "$(INSTDIR)/"
+
+uninstall:
+	$(RM) -r "${INSTDIR}"
 
 -include *.d
 
