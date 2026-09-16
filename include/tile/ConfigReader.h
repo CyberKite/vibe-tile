@@ -23,6 +23,7 @@ namespace Tile{
       Tile::NotApplyStyleToClassNames get_not_apply_style_to_classnames() const;
       Tile::LayoutMethodNames get_layout_method_names() const;
       std::map<std::string, Tile::HotKey> get_keys() const;
+	bool get_show_border_on_startup() const;
   };
 }
 
