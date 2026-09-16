@@ -14,6 +14,9 @@ namespace Tile{
   boost::optional<std::string> ConfigReader::get_run_process_path() const{
     return m_pt.get_optional<std::string>("settings.run_process_path");
   }
+  bool ConfigReader::get_show_border_on_startup() const{
+    return m_pt.get<bool>("settings.show_border_on_startup", false);
+  }
   Tile::IgnoreClassNamesArranged ConfigReader::get_ignore_classnames_arranged() const{
     Tile::IgnoreClassNamesArranged xs;
     auto const children = m_pt.get_child_optional("settings.ignore_classnames_arranged");

@@ -47,8 +47,8 @@ namespace Tile{
     m_border_top_hwnd = make_toolwindow(m_hInstance, m_border_class_name);
     m_border_bottom_hwnd = make_toolwindow(m_hInstance, m_border_class_name);
 
-    // first hide border
-    toggle_border();
+    // hide border by default
+    if(!m_config->get_show_border_on_startup()){ toggle_border(); }
   }
   void TilingWindowManager::regist_key(std::string const& key, void (Tile::TilingWindowManager::* f_)()){
     std::map<std::string, Tile::HotKey> m = m_config->get_keys();

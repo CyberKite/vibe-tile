@@ -25,6 +25,7 @@
       "Windows.UI.Core.CoreWindow",
 	  "Shell_TrayWnd"
       ],
+    "show_border_on_startup": false,
     "not_apply_style_to_classnames" : [
       "CabinetWClass",
       "Chrome_WidgetWin_1",
