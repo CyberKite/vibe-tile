@@ -11,9 +11,16 @@ namespace Tile{
     std::cout << "m_hash_value:" << m_hash_value << std::endl;
 #endif
     m_name = name_;
-    if(::RegisterHotKey(m_main_hwnd, m_hash_value, m_mod, m_k) == 0){
-      system_error("failed ::RegisterHotKey()");
-    }
+      if(::RegisterHotKey(m_main_hwnd, m_hash_value, m_mod, m_k) == 0){
+        std::stringstream ss;
+        ss << "failed ::RegisterHotKey()"
+           << "\nname: " << m_name
+           << "\nmod: " << m_mod
+           << "\nvk: " << m_k
+           << "\nerror: " << ::GetLastError();
+      
+        system_error(ss.str());
+      }
   }
   Key::~Key(){
     ::UnregisterHotKey(m_main_hwnd, m_hash_value);
