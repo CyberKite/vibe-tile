@@ -20,7 +20,10 @@
       "ThunderRT6FormMain",
       "bosa_sdm_XL9",
       "TaskManagerWindow",
-      "wndclass_desked_gsk"
+      "wndclass_desked_gsk",
+      "Progman",
+      "Windows.UI.Core.CoreWindow",
+	  "Shell_TrayWnd"
       ],
     "not_apply_style_to_classnames" : [
       "CabinetWClass",
