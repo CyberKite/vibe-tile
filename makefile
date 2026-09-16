@@ -1,3 +1,5 @@
+APPNAME = cpp-tile
+INSTDIR = $(LOCALAPPDATA)/$(APPNAME)
 
 VPATH = src src/tile src/layout_methods include
 CPPFLAGS = -std=c++11 -pedantic -Wall -Os -fno-strict-aliasing -Wno-unused-local-typedefs -I$(BOOST_ROOT) -Iinclude
@@ -16,6 +18,7 @@ SOURCES = main.cpp \
   arrange_cross.cpp \
   arrange_square.cpp \
   arrange_manual.cpp
+CXXDIR := $(dir $(shell where $(CXX) | head -n 1))
 
 OBJECTS = $(foreach obj,$(subst .cpp,.o,$(SOURCES)),$(notdir $(obj)))
 DEPENDS = $(foreach obj,$(subst .cpp,.d,$(SOURCES)),$(notdir $(obj)))
