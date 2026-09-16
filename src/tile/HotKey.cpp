@@ -7,9 +7,6 @@
 namespace Tile{
   HotKey::HotKey(unsigned int const vk_, bool const shift_, bool const control_, bool const alt_, bool const win_){
     vk = vk_;
-    if('a' <= vk && vk <= 'z'){
-      vk -= 0x20;
-    }
     fsModifiers = 0;
     if(shift_){
       fsModifiers |= MOD_SHIFT;

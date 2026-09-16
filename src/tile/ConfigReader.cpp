@@ -49,15 +49,39 @@ namespace Tile{
     auto const children = m_pt.get_child_optional("keys");
     if(children){
       for(auto const& x : *children){
-        auto const vk_str = x.second.get_optional<std::string>("vk");
-        auto const vk_char = (vk_str ? (0 < vk_str->length() ? vk_str->at(0) : ' ' ) : ' ');
+
+	auto const vk_str = x.second.get_optional<std::string>("vk");
+
+	unsigned int vk = ' ';
+
+	if(vk_str){
+	  if(*vk_str == "F1")       vk = VK_F1;
+	  else if(*vk_str == "F2")  vk = VK_F2;
+	  else if(*vk_str == "F3")  vk = VK_F3;
+	  else if(*vk_str == "F4")  vk = VK_F4;
+	  else if(*vk_str == "F5")  vk = VK_F5;
+	  else if(*vk_str == "F6")  vk = VK_F6;
+	  else if(*vk_str == "F7")  vk = VK_F7;
+	  else if(*vk_str == "F8")  vk = VK_F8;
+	  else if(*vk_str == "F9")  vk = VK_F9;
+	  else if(*vk_str == "F10") vk = VK_F10;
+	  else if(*vk_str == "F11") vk = VK_F11;
+	  else if(*vk_str == "F12") vk = VK_F12;
+	  else if(!vk_str->empty()){
+		vk = vk_str->at(0);
+		if('a' <= vk && vk <= 'z'){
+		   vk -= 'a' - 'A';
+		}
+	  }
+	}
+
         auto const shift = x.second.get_optional<bool>("mod_shift");
         auto const control = x.second.get_optional<bool>("mod_control");
         auto const alt = x.second.get_optional<bool>("mod_alt");
         auto const win = x.second.get_optional<bool>("mod_win");
         m.insert(std::map<std::string, Tile::HotKey>::value_type(
               x.first,
-              HotKey(vk_char,
+              HotKey(vk,
                      (shift ? (*shift) : false),
                      (control ? (*control) : false),
                      (alt ? (*alt) : false),
