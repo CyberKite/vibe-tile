@@ -293,6 +293,13 @@ namespace Tile{
   template <unsigned int i>
     void TilingWindowManager::move_to_workspace(){
       HWND const hwnd = ::GetForegroundWindow();
+   
+      // Only allow windows already managed by the current workspace.
+      auto const hwnds = m_workspace_it->get_managed_hwnds();
+      if(std::find(std::begin(hwnds), std::end(hwnds), hwnd) == std::end(hwnds)){
+          return;
+      }
+
       unsigned int n = 0;
       for(auto it = std::begin(m_workspaces); it < std::end(m_workspaces); it++){
         if(n == i && it != m_workspace_it){
